@@ -119,8 +119,8 @@ exports.signup = async(req, res) => {
             yearsOfExperience: null,
             city: null,
             state: null,
+            consultationLocation: null,
             availabilitySlot: [],
-            bookedSlots: [],
             patientAppointments: [],
         });  // creating empty profile for user to fill details later on registration
 

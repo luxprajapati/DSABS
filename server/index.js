@@ -4,6 +4,7 @@ require("dotenv").config();
 
 // Import the required routes
 const userRoute = require("./routes/UserRoute");
+const profileRoute = require("./routes/ProfileRoute");
 
 const database = require("./config/database");
 const cookieParser = require("cookie-parser");
@@ -19,6 +20,7 @@ app.use(cookieParser());
 
 // Routes
 app.use("/api/auth", userRoute);
+app.use("/api/profile", profileRoute);
 
 
 const server = app.listen(PORT, () => {
