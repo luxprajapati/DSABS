@@ -8,7 +8,7 @@ exports.auth = async (req, res, next) => {
             req.body.token ||
             req.header("Authorization").replace("Bearer ", "");
     
-            console.log("Token in auth middleware--", req.header);
+       
         
         if(!token){
             res.status(401).json({
@@ -17,10 +17,10 @@ exports.auth = async (req, res, next) => {
                 data: token,
             });
         }
-        console.log("Token--", token);
+       
         try{
             const decode = await JWT.verify(token, process.env.JWT_SECRET);
-            console.log("Decode--", decode);
+        
             req.user = decode;
         }catch(err){
             console.log("Erro in auth middleware during decoding the token--", err);

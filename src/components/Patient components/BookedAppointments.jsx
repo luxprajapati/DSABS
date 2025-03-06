@@ -1,35 +1,3 @@
-// import React, { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getPatientAllAppointments } from '../../services/operations/userAPI';
-
-// export const BookedAppointments = () => {
-
-//     const dispatch = useDispatch();
-//     const [bookedAppointments, setBookedAppointments] = useState([]);
-//     const {token} =  useSelector((state) => state.auth);
-
-//     useEffect(() => {
-//         const fetchBookedAppointment = async () =>{
-//             const response = await dispatch(getPatientAllAppointments(token));
-//             console.log("Booked Appointments--", response);
-            
-//             if(response){
-//                 setBookedAppointments(response);
-//             }
-//         }
-
-//         fetchBookedAppointment();
-//     }, [dispatch]);
-
-
-//     console.log("Booked Appointments--", bookedAppointments);
-
-//   return (
-//     <div>BookedAppointments</div>
-//   )
-// }
-
-
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { cancelAppointment, getPatientAllAppointments } from '../../services/operations/userAPI';
@@ -42,7 +10,7 @@ export const BookedAppointments = () => {
     useEffect(() => {
         const fetchBookedAppointment = async () => {
             const response = await dispatch(getPatientAllAppointments(token));
-            console.log("Booked Appointments--", response);
+        
 
             if (response) {
                 setBookedAppointments(response.data.additionalDetails.patientAppointments);
@@ -53,12 +21,10 @@ export const BookedAppointments = () => {
     }, [dispatch, token]);
 
     const handleCancelAppointment = (appointmentId) => {
-        console.log("Cancel appointment with ID:", appointmentId);
+ 
         dispatch(cancelAppointment(token, appointmentId));
     }
    
-
-    console.log("Booked Appointments--", bookedAppointments);
 
     return (
         <div className="p-4">

@@ -23,9 +23,7 @@ export const BookAppointment = () => {
     doctor.additionalDetails?.specialization?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  console.log("Filtered Doctors--", filteredDoctors);
-
-  console.log("All Doctors in jsx--", allDoctors);
+  
 
   return (
     <div className="p-4">

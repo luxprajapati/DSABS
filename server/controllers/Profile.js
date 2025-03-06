@@ -18,7 +18,7 @@ exports.updateProfile = async (req, res) => {
 
 
         const userId = req.user.id;
-        console.log("User ID--", userId);
+       
 
         const userDetail = await UserModel.findById(userId);
         if(!userDetail){
@@ -46,7 +46,7 @@ exports.updateProfile = async (req, res) => {
         .populate("additionalDetails")
         .exec();
 
-        console.log("Profile updated successfully--", updated_user_details);
+       
 
         return res.status(200).json({
             success: true,
@@ -78,7 +78,7 @@ exports.setAvailabilitySlots = async (req, res) => {
         }
 
         const userId = req.user.id;
-        console.log("User ID--", userId);
+      
         if(!userId){
             console.log("User not found");
             return res.status(404).json({
@@ -103,7 +103,7 @@ exports.setAvailabilitySlots = async (req, res) => {
         })
         .exec();
 
-        console.log("Availability slots set successfully--", updated_user_details)
+       
 
         return res.status(200).json({
             success: true,
@@ -133,7 +133,7 @@ exports.getAllDoctors = async (req, res) => {
                 message: "Doctors not found",
             });
         }
-        console.log("All doctors--", allDoctors);
+       
 
         return res.status(200).json({
             success: true,
@@ -155,7 +155,7 @@ exports.getDoctorAndBookSlot = async(req, res) => {
     try{
         const doctorId = req.params.doctorId;
 
-        console.log("Doctor ID--", doctorId);
+        
 
         const doctor = await UserModel.findById(doctorId)
         .populate({
@@ -174,7 +174,7 @@ exports.getDoctorAndBookSlot = async(req, res) => {
             });
         }
 
-        console.log("Doctor in getDoctorbyId function of profile.js --", doctor);
+       
 
         return res.status(200).json({
             success: true,
@@ -197,8 +197,6 @@ exports.bookSlot = async (req, res) => {
         const doctorId = req.params.doctorId;
         const slotId = req.params.slotId;
 
-        console.log("Doctor ID--", doctorId);
-        console.log("Slot ID--", slotId);
 
         const userId = req.user.id;
 
@@ -230,7 +228,7 @@ exports.bookSlot = async (req, res) => {
             "availabilitySlot._id": slotId,
         });
 
-        console.log("Profile Details--", profileDetails);
+   
 
         if (!profileDetails) {
             console.log("Slot not found");
@@ -242,7 +240,7 @@ exports.bookSlot = async (req, res) => {
 
         const bookingSlot = profileDetails.availabilitySlot.id(slotId);
 
-        console.log("Booking Slot--", bookingSlot);
+   
 
         if(bookingSlot.booked === true){
             console.log("Slot already booked");
@@ -257,26 +255,7 @@ exports.bookSlot = async (req, res) => {
         }
         await profileDetails.save();
 
-        // userDetail.additionalDetails.patientAppointments.push({
-        //     doctorId: doctorId,
-        //     date: bookingSlot.day,
-        //     startTime: bookingSlot.startTime,
-        //     endTime: bookingSlot.endTime,
-        // });
-
-        // await UserModel.updateOne(
-        //     { _id: userId },
-        //     {
-        //         $push: {
-        //             "additionalDetails.patientAppointments": {
-        //                 doctorId: doctorId,
-        //                 date: bookingSlot.day,
-        //                 startTime: bookingSlot.startTime,
-        //                 endTime: bookingSlot.endTime,
-        //             },
-        //         },
-        //     }
-        // );
+     
 
         await ProfileModel.updateOne(
             { _id: userDetail.additionalDetails._id },
@@ -292,8 +271,7 @@ exports.bookSlot = async (req, res) => {
             }
         );
 
-        // await userDetail.save();
-        // await bookingSlot.save();
+     
 
         const emailResponse = await mailSender(
             userDetail.email,
@@ -306,7 +284,7 @@ exports.bookSlot = async (req, res) => {
                 doctorDetail.additionalDetails.consultationLocation)
         );
 
-        console.log("Email Response for appointment booked successfully--", emailResponse);
+        
 
         const updated_user_details = await UserModel.findById(userId)
         .populate({
@@ -317,7 +295,7 @@ exports.bookSlot = async (req, res) => {
         })
         .exec();
 
-        console.log("Slot booked successfully--", updated_user_details);
+      
         return res.status(200).json({
             success: true,
             message: "Slot booked successfully in bookSlot function of Profile.js",
@@ -357,7 +335,7 @@ exports.getPatientAppointments = async (req, res) => {
             });
         }
 
-        console.log("User appointments--", userDetail);
+     
 
         return res.status(200).json({
             success: true,
@@ -380,8 +358,8 @@ exports.cancelAppointment = async(req, res) => {
         const userId = req.user.id;
         const appointmentId = req.params.appointmentId;
 
-        console.log("User ID--", userId);
-        console.log("Appointment ID--", appointmentId);
+   
+    
 
         const userDetail = await UserModel.findById(userId)
         .populate({
@@ -405,7 +383,7 @@ exports.cancelAppointment = async(req, res) => {
         })
         .populate("patientAppointments")
         .exec();
-        console.log("Appointment--", appointment);
+       
 
         if(!appointment){
             console.log("Appointment not found");
@@ -416,18 +394,18 @@ exports.cancelAppointment = async(req, res) => {
         }
 
         const patientsAppointments = appointment.patientAppointments;
-        console.log("Patients Appointments--", patientsAppointments);
+      
 
         const cancellingAppointment = patientsAppointments.find((appointment) => appointment._id.toString() === appointmentId);
 
-        console.log("Cancelling Appointment--", cancellingAppointment);
+        
 
         const doctorId = cancellingAppointment.doctorId;
 
-        console.log("Doctor ID--", doctorId);
+;
 
         const doctorDetail = await UserModel.findById(doctorId).populate("additionalDetails").exec();
-        console.log("Doctor Detail--", doctorDetail);
+      ;
 
         if (!doctorDetail) {
             console.log("Doctor not found");
@@ -438,7 +416,7 @@ exports.cancelAppointment = async(req, res) => {
         }
 
         const doctorSlots = doctorDetail.additionalDetails.availabilitySlot;
-        console.log("Doctor Slots--", doctorSlots);
+        
 
         const startingTime = cancellingAppointment.startTime;
         const endingTime = cancellingAppointment.endTime;
@@ -464,7 +442,7 @@ exports.cancelAppointment = async(req, res) => {
         )
 
 
-        console.log("Email Response for appointment Cancelled--", emailResponse);
+       
         
         const updated_user_details = await UserModel.findById(userId)
         .populate({
@@ -475,7 +453,7 @@ exports.cancelAppointment = async(req, res) => {
         })
         .exec();
         
-        console.log("Appointment cancelled successfully--", updated_user_details);
+       
 
         return res.status(200).json({
             success: true,

@@ -50,7 +50,7 @@ export function sentotp(email, navigate) {
     return async (dispatch) => {
       const toastId = toast.loading("Loading...");
       dispatch(setLoading(true));
-      console.log("Account type in authAPI:--", accountType);
+    
       try {
       const response = await apiConnector("POST", SIGNUP_API, {
         accountType,
@@ -61,7 +61,7 @@ export function sentotp(email, navigate) {
         confirmPassword,
         otp,
       });
-      console.log("SIGNUP_API RESPONSE...............", response);
+      
   
         if (!response.data.success) {
           throw new Error(response.data.message);
@@ -92,7 +92,7 @@ export function sentotp(email, navigate) {
           throw new Error(response.data.message);
         }
         toast.success("Login Successful");
-        console.log("token in email login:- ", response.data);
+        
         const token = response.data.data.token;
         dispatch(setToken(token));
         dispatch(setUser(response.data.data.accountType));

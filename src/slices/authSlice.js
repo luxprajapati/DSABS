@@ -27,7 +27,7 @@ const authSlice = createSlice({
       state.signupData = action.payload;
     },
     setToken: (state, action) => {
-      console.log("Setting token in state:", action.payload);
+   
       state.token = action.payload;
     },
     setLoading: (state, action) => {

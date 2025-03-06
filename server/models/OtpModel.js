@@ -26,8 +26,7 @@ async function sendVerificationMail(email, otp){
             otpTemplate(otp)
         );
 
-        console.log("Mail send successfully [OTP model]");
-        console.log("Mail Response--",mailResponse);
+     
 
     }catch(err){
         console.log("Error while sending verification mail--",err);
@@ -37,7 +36,7 @@ async function sendVerificationMail(email, otp){
 
 
   otpSchema.pre("save", async function (next) {
-    console.log("Mail in pre-hook--", this.email);
+  
     await sendVerificationMail(this.email, this.otp);
     next();
 })

@@ -26,7 +26,7 @@ const Signup = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  // console.log("FormData", formData);
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -36,7 +36,7 @@ const Signup = () => {
     const signupData = {
       ...formData,
     };
-    console.log("Signup Data", signupData);
+   
     dispatch(setSignupData(signupData));
     // send otp
     dispatch(sentotp(formData.email, navigate));

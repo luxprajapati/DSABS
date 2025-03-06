@@ -26,7 +26,7 @@ const OtpPage = () => {
     const {accountType ,firstName, lastName, email, password, confirmPassword} =
       signupData;
 
-      console.log("Signup Data in otp page:-", signupData);
+    
 
     dispatch(
       signup(

@@ -43,8 +43,7 @@ exports.sendotp = async(req, res) => {
 
         const otpPayload = {email, otp};
         const otpBody = await OTPModel.create(otpPayload);
-        console.log("OTP Body in Auth controller--", otpBody);
-
+       
         return res.status(200).json({
             success: true,
             message: "OTP sent successfully",
@@ -135,7 +134,7 @@ exports.signup = async(req, res) => {
 
         const recentOtp = await OTPModel.findOne({email}).sort({createdAt: -1}).limit(1);
 
-        console.log("Recent OTP--", recentOtp);
+        
 
         if(recentOtp.length === 0){
             return res.status(400).json({
@@ -143,8 +142,7 @@ exports.signup = async(req, res) => {
                 message: "Please request for OTP again",
             });
         }else if(recentOtp.otp !== otp){
-            console.log("Recent OTP--", recentOtp[0].otp);
-            console.log("Entered OTP--", otp);
+          
             return res.status(400).json({
                 success: false,
                 message: "Invalid OTP",
@@ -174,7 +172,7 @@ exports.signup = async(req, res) => {
         });
 
 
-        console.log("User registered successfully in signup function of Auth.js--", newUser);
+ 
 
         return res.status(200).json({
             success: true,
@@ -231,7 +229,7 @@ exports.login = async(req, res) => {
             const token = JWT.sign(payload, process.env.JWT_SECRET, {expiresIn: "24h"});
             userExist.token = token;
             userExist.password = undefined; // to hide password from response
-            console.log("User logged in successfully in login function of Auth.js--", userExist);
+          
 
             res.cookie("userInfo", token,
                 {

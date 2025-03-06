@@ -21,16 +21,16 @@ export const ViewDoctorInfo = () => {
         fetchDoctor();
     }, [dispatch]);
 
-    console.log("Current doctor in view doctor info--", doctor);
+  
 
     if (!doctor) {
         return <div>Loading...</div>;
     }
 
     const handleBookSlot = (slotId) => {
-        console.log("Slot ID--", slotId);
+ 
         const navigateUrl = `/booking-appointment/${doctorId}/${slotId}`;
-        console.log("Navigate URL--", navigateUrl);
+     
         navigate(navigateUrl);
     }
 

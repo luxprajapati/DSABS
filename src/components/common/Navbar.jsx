@@ -9,11 +9,8 @@ export const Navbar = () => {
     const dispatch =  useDispatch();
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
-    // const user = {
-    //     user : "Patient"
-    // }
-
-    console.log("User", user);
+    
+  
     
 
   return (

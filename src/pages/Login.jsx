@@ -25,7 +25,7 @@ const Login = (props) => {
       [e.target.name]: e.target.value,
     }));
   };
-  // console.log("FormData", formData);
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(login(email, password, navigate));
