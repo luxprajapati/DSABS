@@ -7,6 +7,11 @@ import Login from './pages/Login';
 import OpenRoute from './components/core/OpenRoute';
 import Signup from './pages/Signup';
 import OtpPage from './pages/OtpPage';
+import { BookAppointment } from './components/Patient components/BookAppointment';
+import { ViewDoctorInfo } from './components/Patient components/ViewDoctorInfo';
+import { FinalConfirmAppointmentBooking } from './components/Patient components/FinalConfirmAppointmentBooking';
+import { BookedAppointments } from './components/Patient components/BookedAppointments';
+import { UpdateProfile } from './components/DoctorComponents/UpdateProfile';
 
 function App() {
 
@@ -17,6 +22,38 @@ function App() {
       <Navbar />
       <Routes >
 
+        {user.user === "Patient" && (
+          <Route path= "/book-appointment" element = {
+            <BookAppointment />
+          } />
+        )
+        }
+        {user.user === "Patient" && 
+        (
+          <Route path='/book-appointment/:doctorId' element = {
+            <ViewDoctorInfo/>
+          } />
+        )
+        }
+
+        {user.user === "Patient" && (
+          <Route path = '/booking-appointment/:doctorId/:slotId' element = {
+            <FinalConfirmAppointmentBooking />
+          } />
+        )}
+
+        {user.user === "Patient" && (
+          <Route path ='/user-appointments' element={
+            <BookedAppointments />
+          }/>
+        )}
+
+        {user.user === 'Doctor' && (
+          <Route path='/doctor-dashboard' element={
+            <UpdateProfile/>
+          }/>
+        )}
+        
       <Route path='/' element= {
         <Home />
       } />

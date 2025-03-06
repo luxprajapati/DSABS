@@ -2,6 +2,7 @@ import {setLoading, setToken} from "../../slices/authSlice";
 import { endpoints } from "../apis";
 import {apiConnector} from "../apiconnector";
 import toast from "react-hot-toast";
+import { setUser } from "../../slices/profileSlice";
 
 
 const {
@@ -92,8 +93,11 @@ export function sentotp(email, navigate) {
         }
         toast.success("Login Successful");
         console.log("token in email login:- ", response.data);
-        dispatch(setToken(response.data.token));
-        localStorage.setItem("token", JSON.stringify(response.data.token));
+        const token = response.data.data.token;
+        dispatch(setToken(token));
+        dispatch(setUser(response.data.data.accountType));
+        localStorage.setItem("token", JSON.stringify(token));
+        localStorage.setItem("user", JSON.stringify(response.data.data.accountType));
         navigate("/");
       } catch (err) {
         console.log("LOGIN_API ERROR..................", err);
@@ -108,7 +112,9 @@ export function sentotp(email, navigate) {
   export function logout(navigate) {
     return (dispatch) => {
       dispatch(setToken(null));
+      dispatch(setUser(null));
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
       toast.success("Logged Out");
       navigate("/");
     };

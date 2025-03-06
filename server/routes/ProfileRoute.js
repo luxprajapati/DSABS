@@ -17,7 +17,7 @@ const {
 const {auth, isPatient} = require("../middlewares/auth");
 
 // ===================================Profile ROUTES==============================================
-router.post("/update-profile", auth, updateProfile);
+router.put("/update-profile", auth, updateProfile);
 
 router.post("/set-availability-slots", auth, setAvailabilitySlots);
 

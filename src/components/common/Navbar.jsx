@@ -8,27 +8,53 @@ export const Navbar = () => {
 
     const dispatch =  useDispatch();
     const {token} = useSelector((state) => state.auth);
-    // const token = "1212";
     const {user} = useSelector((state) => state.profile);
-    console.log("User in navbar--",user);
+    // const user = {
+    //     user : "Patient"
+    // }
+
+    console.log("User", user);
+    
 
   return (
     <div className='flex flex-row w-full justify-between items-center px-10 py-5 bg-blue-500 text-white '>
         <div className='font-extrabold text-2xl'>
             <NavLink to='/'>Clinix-360</NavLink>
         </div>
-        <div className='flex flex-row space-x-4'>
+        <div className='flex flex-row space-x-4 items-center font-semibold'>
             <div> 
                 {token === null && (
                     <NavLink to ='/login' > Sign in</NavLink>
                 )}
             </div>
-            <div> {token === null && (<NavLink to ='/signup' > Sign up</NavLink>)} </div>
+
+            <div> {token === null && (<NavLink to ='/signup' > Sign up</NavLink>)} </div>   
 
             <div>
                 {
-                    token !== null && (
+                    token !== null &&  user === "Patient" && (
+                        <div className='border-2  border-gray-200 font-semibold px-2 py-1 rounded-md text-xs'> 
+                            <NavLink to = "/book-appointment"> Book Appointment</NavLink>
+                        </div>
+                    )
+                }                    
+            </div>
+
+
+            <div>
+                {
+                    token !== null && user.user === "Patient" && (
                         <NavLink to='/user-appointments'>
+                            <VscAccount size={25} />
+                        </NavLink>
+                    )
+                }
+            </div>
+
+            <div>
+                {
+                    user === "Doctor" && (
+                        <NavLink to='/doctor-dashboard'>
                             <VscAccount size={25} />
                         </NavLink>
                     )
@@ -42,6 +68,8 @@ export const Navbar = () => {
                     }}>Logout</NavLink>
                 )}
             </div>
+
+
         </div>
     </div>
   )

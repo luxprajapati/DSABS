@@ -292,8 +292,6 @@ exports.bookSlot = async (req, res) => {
             }
         );
 
-       
-
         // await userDetail.save();
         // await bookingSlot.save();
 
