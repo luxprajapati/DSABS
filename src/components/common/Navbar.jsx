@@ -40,7 +40,7 @@ export const Navbar = () => {
 
             <div>
                 {
-                    token !== null && user.user === "Patient" && (
+                    token !== null && user === "Patient" && (
                         <NavLink to='/user-appointments'>
                             <VscAccount size={25} />
                         </NavLink>
