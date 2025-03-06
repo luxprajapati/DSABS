@@ -73,10 +73,49 @@ exports.signup = async(req, res) => {
         } = req.body;
 
         if(!accountType || !firstName || !lastName || !email || !password || !confirmPassword || !otp){
-            return res.status(400).json({
-                success: false,
-                message: "All fields are required",
-            });
+            if(!accountType){
+                return res.status(400).json({
+                    success: false,
+                    message: "Account type is required",
+                });
+            }
+            if(!firstName){
+                return res.status(400).json({
+                    success: false,
+                    message: "First name is required",
+                });
+            }
+            if(!lastName){
+                return res.status(400).json({
+                    success: false,
+                    message: "Last name is required",
+                });
+            }
+            if(!email){
+                return res.status(400).json({
+                    success: false,
+                    message: "Email is required",
+                });
+            }
+            if(!password){
+                return res.status(400).json({
+                    success: false,
+                    message: "Password is required",
+                });
+            }
+            if(!confirmPassword){
+
+                return res.status(400).json({
+                    success: false,
+                    message: "Confirm password is required",
+                });
+            }
+            if(!otp){
+                return res.status(400).json({
+                    success: false,
+                    message: "OTP is required",
+                });
+            }
         }
 
         if(password !== confirmPassword){
