@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: "https://doctor-appointment-booking-system-luxprajapati.vercel.app",
+    origin: "https://dsabs-lux-prajapati.vercel.app",
     credentials: true,
   })
 );
