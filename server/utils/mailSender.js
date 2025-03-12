@@ -18,7 +18,7 @@ exports.mailSender = async (email, subject, body) => {
       html: `${body}`, // plain text body
     });
 
-    console.log("Info", info);
+    // console.log("Info", info);
     return info;
   } catch (err) {
     console.log("Error in sending mail [mailSender file]--");

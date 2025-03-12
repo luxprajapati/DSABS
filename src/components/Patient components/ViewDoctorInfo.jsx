@@ -21,7 +21,7 @@ export const ViewDoctorInfo = () => {
         fetchDoctor();
     }, [dispatch]);
 
-  
+    
 
     if (!doctor) {
         return <div>Loading...</div>;

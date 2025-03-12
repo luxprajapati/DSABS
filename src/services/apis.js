@@ -17,4 +17,5 @@ export const userEndpoints = {
     CANCELAPPOINTMENT_API: BASE_URL + "/profile/cancel-appointment/:appointmentId",
     GETDOCTORAPPOINTMENTS_API: BASE_URL + "/profile/get-doctor-appointments",
     UPDATEPROFILE_API: BASE_URL + "/profile/update-profile",
+    CREATESLOT_API: BASE_URL + "/profile/set-availability-slots",
 }

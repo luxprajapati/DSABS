@@ -2,6 +2,7 @@ import { userEndpoints } from "../apis";
 import {apiConnector} from "../apiconnector";
 import toast from "react-hot-toast";
 import { setLoading } from "../../slices/authSlice";
+import { setUser } from "../../slices/profileSlice";
 
 const {
     GETALLDOCTORS_API,
@@ -9,7 +10,8 @@ const {
     BOOKSLOT_API,
     GETPATIENTAPPOINTMENTS_API,
     CANCELAPPOINTMENT_API,
-    UPDATEPROFILE_API
+    UPDATEPROFILE_API,
+    CREATESLOT_API
 } = userEndpoints;
 
 export function getAllDoctors(){
@@ -112,7 +114,7 @@ export function cancelAppointment(token, appointmentId){
     }
 }
 
-export function updateProfile(token, formdata){
+export function updateProfile(token, formdata, navigate){
     return async(dispatch) =>{
         const toastId = toast.loading("Loading...");
         dispatch(setLoading(true));
@@ -122,11 +124,48 @@ export function updateProfile(token, formdata){
             );
  
             toast.success("Profile updated successfully");
+            
+            
+            dispatch(setUser(response.data.data));
+
+            navigate('/doctor-dashboard');
+
+            console.log("response.data", response.data);
             return response.data;
         }catch(err){
             console.log("Failed to update profile--", err);
             toast.error("Failed to update profile");
         }finally{
+            dispatch(setLoading(false));
+            toast.dismiss(toastId);
+        }
+    }
+}
+
+
+export function setAvailabilitySlot(token, formdata){
+
+
+    // console.log("formdata", formdata);
+    return async(dispatch) => {
+        const toastId = toast.loading("Loading...");
+        dispatch(setLoading(true));
+        try{
+
+            const response = await apiConnector("POST", CREATESLOT_API, formdata, 
+                {Authorization: `Bearer ${token}`,}
+            );
+
+            toast.success("Availability slot set successfully");
+            console.log("response.data", response.data);
+            dispatch(setUser(response.data.data));
+            return response.data;
+
+        }catch(err){
+            console.log("Failed to set availability slot--", err);
+            toast.error("Failed to set availability slot");
+        }
+        finally{
             dispatch(setLoading(false));
             toast.dismiss(toastId);
         }

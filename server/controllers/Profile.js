@@ -316,7 +316,7 @@ exports.bookSlot = async (req, res) => {
 exports.getPatientAppointments = async (req, res) => {
     try{
         const userId = req.user.id;
-        console.log("User ID--", userId);
+        // console.log("User ID--", userId);
 
         const userDetail =  await UserModel.findById(userId)
         .populate({

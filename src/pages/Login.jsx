@@ -54,7 +54,7 @@ const Login = (props) => {
                 value={email}
                 onChange={handleOnChange}
                 className="w-full px-4 py-2 border  rounded-lg focus:outline-none focus:border-blue-500 bg-slate-100"
-                placeholder="E.g. luxprajapati@gmail.com"
+                placeholder="Enter your email"
               />
             </div>
             <div className="mb-4">

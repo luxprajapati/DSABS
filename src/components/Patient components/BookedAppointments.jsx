@@ -10,8 +10,7 @@ export const BookedAppointments = () => {
     useEffect(() => {
         const fetchBookedAppointment = async () => {
             const response = await dispatch(getPatientAllAppointments(token));
-        
-
+            
             if (response) {
                 setBookedAppointments(response.data.additionalDetails.patientAppointments);
             }

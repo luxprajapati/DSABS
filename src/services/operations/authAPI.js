@@ -97,7 +97,8 @@ export function sentotp(email, navigate) {
         dispatch(setToken(token));
         dispatch(setUser(response.data.data.accountType));
         localStorage.setItem("token", JSON.stringify(token));
-        localStorage.setItem("user", JSON.stringify(response.data.data.accountType));
+        localStorage.setItem("user", JSON.stringify(response.data.data));
+        // console.log("Login response from the authAPI---", response.data.data);
         navigate("/");
       } catch (err) {
         console.log("LOGIN_API ERROR..................", err);
