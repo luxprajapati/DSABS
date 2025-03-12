@@ -10,7 +10,7 @@ export const Navbar = () => {
     const {token} = useSelector((state) => state.auth);
     const {user} = useSelector((state) => state.profile);
 
-    console.log("user in Navbar--", user);
+    // console.log("user in Navbar--", user);
 
   return (
     <div className='flex flex-row w-full justify-between items-center px-10 py-5 bg-blue-500 text-white '>
