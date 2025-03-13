@@ -16,9 +16,9 @@ import { Slots } from './components/DoctorComponents/Slots';
 
 function App() {
 
-  const user = useSelector((state) => state.profile); 
+  const {user} = useSelector((state) => state.profile);
 
-  // console.log("user in App--", user);
+  // console.log("APP.JS USER---", user);                          
 
   return (
     <div className="App">
