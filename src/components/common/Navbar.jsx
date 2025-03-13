@@ -29,7 +29,7 @@ export const Navbar = () => {
 
             <div>
                 {
-                    token !== null &&  user  === "Patient" && (
+                    token !== null &&  user?.accountType  === "Patient" && (
                         <div className='border-2  border-gray-200 font-semibold px-2 py-1 rounded-md text-xs'> 
                             <NavLink to = "/book-appointment"> Book Appointment</NavLink>
                         </div>
@@ -39,7 +39,7 @@ export const Navbar = () => {
 
             <div>
                 {
-                    token !== null && user === "Patient" && (
+                    token !== null && user?.accountType === "Patient" && (
                         <NavLink to='/user-appointments'>
                             <VscAccount size={25} />
                         </NavLink>
@@ -49,7 +49,7 @@ export const Navbar = () => {
 
             <div>
                 {
-                    user === "Doctor" && (
+                    user?.accountType === "Doctor" && (
                         <NavLink to='/slots'>
                             <div>Slot</div>
                         </NavLink>
@@ -59,7 +59,7 @@ export const Navbar = () => {
 
             <div>
                 {
-                    user === "Doctor" && (
+                    user?.accountType === "Doctor" && (
                         <NavLink to='/doctor-dashboard'>
                             <VscAccount size={25} />
                         </NavLink>
